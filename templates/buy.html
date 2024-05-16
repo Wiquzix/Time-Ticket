@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Покупка билетов
+{% endblock %}
+
+
+
+{% block main %}
+<style>
+.map {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.container-m {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 35px;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 20px;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-danger">
+            {% for message in messages %}
+            <h2>{{ message }}</h2>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+<br>
+<a href="/" class="btn btn-danger">Вернуться на главную</a>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

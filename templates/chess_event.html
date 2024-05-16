@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Турнир по шахматам
+{% endblock %}
+
+
+
+{% block main %}
+<style>
+.map {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.container-m {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 35px;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 20px;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+<br>
+<h2>Турнир по шахматам</h2>
+<h4>Начало - 15:00 22.04.2023</h4>
+<h4>Конец - 18:00 23.04.2023</h4>
+<hr class="my-4">
+<br>
+<h4>О мероприятии</h4>
+
+
+<br>
+<h6>Турнир по шахматам - это соревнование, где участники играют в шахматы, следуя определенным правилам и стратегиям. Данный турнир проходит в офлайн режиме, и может быть разделен на несколько категорий в зависимости от уровня игроков: начинающие, любители, профессионалы. В конце нашего турнира обязательно объявляются победители и вручаются призы. Турниры по шахматам - это не только возможность для игроков продемонстрировать свои навыки и умения, но и отличный способ провести время в компании единомышленников и насладиться увлекательной игрой.</h6>
+<br>
+
+<h5>Прайс:</h5>
+<h6>Участник - 100 рублей</h6>
+<h6>Зритель - 50 рублей</h6>
+<h6>VIP Зритель - 200 рублей</h6>
+<em>Организатор: ООО "Chess_KRSK_play"</em>
+<img src="/static/img/3.jpg">
+<br>
+<img src="/static/img/4.jpg">
+<br>
+<img src="/static/img/5.jpg">
+{% if current_user.admin %}
+    <hr class="my-4">
+
+{% endif %}
+
+<a href="/buy_tickets" class="btn btn-primary m-up" >Купить билеты</a>
+
+{% endblock %}

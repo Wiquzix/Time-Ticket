@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+
+
+{% block main %}
+    <br>
+    <h3>{{user.fio}}, {{user.age}} год(а)</h3>
+    <img src={{url_for('static',filename='img/{}'.format(user[current_user.id]))}} width="500px" style="object-fit: cover"><span>{{current_user.fio}}</span>
+    {{user.photo}}
+
+    <hr class="my-4">
+<!--    <h5>{{b.description}}</h5>-->
+            <a href="/profile_upd/{{current_user.id}}" class="btn btn-primary">Редактировать</a><br>
+
+    <table class="table table-sm table-bordered">
+      <thead>
+      <tr>
+        <th>Участвует</th>
+        <th>Организует</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for i in range(b|length) %}
+          <tr>
+            <td>b[1][i].name</td>
+            <td>b[2][i].name</td>
+        {% endfor %}
+      </tr>
+      </tbody>
+    </table>
+
+
+{% endblock %}

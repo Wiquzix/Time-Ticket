@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{event.name}}
+{% endblock %}
+
+
+
+{% block main %}
+<style>
+.map {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.container-m {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 35px;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 20px;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<br>
+<h2>{{event.name}} </h2>
+<h4>Начало: {{event.start_datetime}}</h4>
+<h4>Конец: {{event.end_datetime}}</h4>
+
+<hr class="my-4">
+<img src={{url_for('static',filename='img/{}'.format(event.filename))}} width="720px" height="480px" class="displayed">
+<br>
+<h4>О мероприятии</h4>
+
+
+<br>
+<h6>{{event.description}}</h6>
+<br>
+<em>Организатор: </em>
+<a href="/profile/{{event.organizer}}"><em>{{organizer.fio}}</em></a>
+<br>
+<em>Ваш баланс: {{ balance }}</em>
+<br>
+<a href="/buy_ticket/{{ event.id }}/{{ type[0].id }}" class="btn btn-warning">купить {{type[0].type}}<br> цена: {{type[0].price}}</a>
+<a href="/buy_ticket/{{ event.id }}/{{ type[1].id }}" class="btn btn-warning">купить {{type[1].type}}<br> цена: {{type[1].price}}</a>
+<a href="/buy_ticket/{{ event.id }}/{{ type[2].id }}" class="btn btn-warning">купить {{type[2].type}}<br> цена: {{type[2].price}}</a>
+
+{% if current_user.admin %}
+    <hr class="my-4">
+    <a href="/events/{{ event.id }}/del" class="btn btn-danger">Удалить</a>
+    <a href="/add_event/{{ event.id }}" class="btn btn-primary">Редактировать</a>
+{% endif %}
+<br>
+<br>
+{% if current_user.admin or current_user.id == organizer.id %}
+    {% for user in event_users %}
+        <a href="/profile/{{ user.id }}">{{user.fio}}</a>
+        <br>
+    {% endfor %}
+{% endif %}
+{% endblock %}

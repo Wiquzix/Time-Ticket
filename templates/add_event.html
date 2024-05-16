@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ваше мероприятие
+{% endblock %}
+
+
+
+{% block main %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-danger">
+            {% for message in messages %}
+            <h2>{{ message }}</h2>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+    <br>
+    <h3 id="header-elem">Ваше мероприятие</h3>
+    <hr class="my-4">
+    <form method="post" enctype="multipart/form-data" id="form">
+        <input type="text" name="name" id="name" class="form-control" placeholder="Введите название мероприятия" value="{{ event.name}}" required=""><br>
+        <textarea name="about" id="about" class="form-control" placeholder="Введите описание мероприятия" required="">{{ event.description }}</textarea><br>
+        <input type="file" class="form-control" name="file" placeholder="Выберите фотографию мероприятия" value="{{ event.filename}}"required=""><br>
+        <input type="text" name="adress" id="adress" class="form-control" placeholder="Введите адресс мероприятия" value="{{ event.adress }}" required=""><br>
+
+        <input type="text" name="time1" id="time1" class="form-control" placeholder="Введите начало мероприятия" value="{{ event.start_datetime}}" required=""><br>
+        <input type="text" name="time2" id="time2" class="form-control" placeholder="Введите окончание мероприятия" value="{{ event.end_datetime}}" required=""><br>
+
+        <div class="input-group">
+          <span class="input-group-text">Тип и цена билета</span>
+          <input type="text" aria-label="Тип" id="type" name="type" class="form-control" placeholder="Тип" value="{{types[0].type}}" required="">
+          <input type="text" aria-label="Цена" id="price" name="price" class="form-control" placeholder="Цена" value="{{types[0].price}}" required="">
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text">Тип и цена билета</span>
+          <input type="text" aria-label="Тип" id="type2" name="type2" class="form-control" placeholder="Тип" value="{{types[1].type}}" required="">
+          <input type="text" aria-label="Цена" id="price2" name="price2" class="form-control" placeholder="Цена" value="{{types[1].price}}" required="">
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text">Тип и цена билета</span>
+          <input type="text" aria-label="Тип" id="type3" name="type3" class="form-control" placeholder="Тип" value="{{types[2].type}}" required="">
+          <input type="text" aria-label="Цена" id="price3" name="price3" class="form-control" placeholder="Цена" value="{{types[2].price}}" required="">
+        </div>
+       <input type="submit" class="btn btn-primary" value="Отправить">
+    </form>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+
+
+{% block main %}
+    <br>
+    <h3>{{user.fio}}, возраст: {{user.age}}</h3>
+    <p>{{user.description}}</p>
+
+    <br>
+    <table class="table table-sm table-bordered">
+      <thead>
+      <tr>
+        <th>Участвует</th>
+        <th>Организует</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% if (events|length) != 0 or (organizer|length) != 0 %}
+        {% if (events|length)>(organizer|length)%}
+          {% for i in range(events|length) %}
+            <tr>
+              <td>
+                {% if events[i] != 0 %}
+                <a href="/event/{{events[i].id}}">
+                  {{events[i].name}}
+                </a>
+                {% else %}
+                  ---
+                {%endif%}
+              </td>
+              <td>
+                {% if organizer[i] !=  0 %}
+                <a href="/event/{{organizer[i].id}}">
+                  {{organizer[i].name}}
+                </a>
+                {% else %}
+                  ---
+                {%endif%}
+              </td>
+          {% endfor %}
+        {%else%}
+          {% for i in range(organizer|length) %}
+            <tr>
+              <td>
+                {% if events[i] !=  0 %}
+                  <a href="/event/{{events[i].id}}">
+                  {{events[i].name}}
+                </a>
+                {% else %}
+                  ---
+                {%endif%}
+              </td>
+              <td>
+                {% if organizer[i] !=  0 %}
+                <a href="/event/{{organizer[i].id}}">
+                  {{organizer[i].name}}
+              </a>
+                {% else %}
+                  ---
+                {%endif%}
+              </td>
+          {% endfor %}
+          {%endif%}
+      {% else %}
+          <tr>
+            <td>Данный пользователь не записался ещё ни на одно мероприятие</td>
+            <td>Данный пользователь не проводит мероприятие</td>
+      {%endif%}
+      </tr>
+      </tbody>
+    </table>
+
+
+{% endblock %}

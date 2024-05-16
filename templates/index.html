@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная
+{% endblock %}
+
+
+
+{% block main %}
+<style>
+.map {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.container-m {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 35px;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 20px;
+}
+.up{
+    margin-top:15px;
+}
+</style>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-danger">
+            {% for message in messages %}
+            <h2>{{ message }}</h2>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+  <h2>Мероприятия</h2>
+  <hr class="border border-dark border-2 opacity-75">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% if events != 0 %}
+      {% for i in range(events|length) %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div><h4>{{ events[i].name }}</h4></div>
+            <a href="/event/{{ events[i].id }}"><img src="static/img/{{events[i].filename}}" class="card-img-top" width="100%" height="225"></a>
+            <div class="card-body">
+              <p class="card-text">{{ events[i].description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="/event/{{ events[i].id }}"><button type="button" class="btn btn-sm btn-outline-primary">Открыть</button></a>
+                </div>
+                <div align='right'>
+                  <span >{{ events[i].start_datetime }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+        </div>
+
+
+  <div class="row mb-2 up" >
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">Просмотреть все мероприятия</h3><br>
+          <p class="card-text mb-auto">А здесь вы можете посмотреть все мероприятия.</p>
+          <a href="/events" class="stretched-link">Просмотреть все мероприятия</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="{{ url_for('static', filename='events.jpg') }}" width="200" height="auto" class="bd-placeholder-img">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">Создать мероприятие</h3><br>
+          <p class="mb-auto">Наш сайт предоставляет возможность бесплатно и удобно создать любое мероприятие, с возможностью покупки онлайн билетов.</p>
+          <a href="/add_event/0" class="stretched-link">Создать мероприятие</a>
+        </div>
+        <div class="col-auto d-none d-lg-block ">
+          <img src="{{ url_for('static', filename='add_event.jpg') }}" width="200" height="auto" class="bd-placeholder-img">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
